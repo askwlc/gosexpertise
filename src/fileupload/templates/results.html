@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Результаты</title>
+    <style>
+        body {
+            background-image: url("{% static 'background_results.jpg' %}");
+            background-size: cover;
+            font-size: 1.6em;
+            font-weight: 600;
+            position: relative;
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+        .details-btn {
+            margin-left: 15px;
+        }
+        .upload-btn {
+            background-color: #274981;
+            color: white;
+            border: none;
+            cursor: pointer;
+            position: fixed;
+            bottom: 50px;
+            right: 0;
+            margin: 20px;
+            display: inline-block;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Проверенные файлы</h1>
+    {% if results_files %}
+    <ul>
+        {% for file in results_files %}
+            {% if file|slice:"-5:" == '.html' %}
+                <li>
+                    {% with shortened_name=file|slice:"0:40" %}
+                        {{ shortened_name }}{% if file|length > 40 %}...{% endif %}
+                    {% endwith %}
+
+                    <a class="details-btn" href="/results/{{ file }}" target="_blank">Подробнее...</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>Файлы не найдены.</p>
+    {% endif %}
+
+    <a href="/" class="upload-btn">Загрузить новые файлы</a>
+</body>
+</html>

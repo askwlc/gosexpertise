@@ -1,0 +1,98 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upload File</title>
+        <style>
+            body {
+                background-image: url('{% static "background.jpg" %}');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .global-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                margin: auto;
+            }
+
+            .search-field {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                margin-bottom: 30px;
+            }
+
+            .search-field input[name="search_query"] {
+                width: 100%;
+                padding: 10px;
+                font-size: 25px;
+                text-align: center; 
+            }
+
+            .button-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%; 
+                text-align: center;
+            }
+
+            .button-container label, .button-container button {
+                display: inline-block;
+                max-width: 100%;  
+                margin: 25px 0;
+                color: white;
+                background-color: #274981;
+                border: none;
+                font-size: 25px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                padding: 20px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .button-container label:hover, .button-container button:hover {
+                background-color: #274981;
+                transform: scale(1.1);
+            }
+
+            #file {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="global-container">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="search-field">
+                    <input type="text" name="search_query" placeholder="Введите название ОКС" required>
+                </div>
+                <div class="button-container">
+                    <input type="file" name="files" multiple id="file">
+                    <label for="file" class="big-button">Выберите каталог/файлы</label>
+                    <button type="submit" class="small-button">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
+
+
+
+
+
+
+
+
